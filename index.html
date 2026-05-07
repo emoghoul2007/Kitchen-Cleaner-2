@@ -775,14 +775,14 @@ function sendToTelegram(event) {
     const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
     // Дані для Google Sheets
-    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbwapCCS9oUiT7rViIjNdgS5Yg3h1xLhLDWElpQrjpsCm8YiXgmwIQ8PBOn2zVlnKDVvNA/exec';
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbzNisWpmPv5Oqb8ZxgRiD696P8ekPzd47nN9PsQp11nQthoddxqnO2a8ksOicmMymnJyg/exec';
     const sheetData = {
         "name": name,
         "phone": phone,
         "variant": qty,
         "total": (function(q) {
-            if (q.includes('1 шт')) return 299;
-            if (q.includes('2 шт')) return 598;
+            if (q.includes('1 шт')) return 598;
+            if (q.includes('2 шт')) return 897;
             return 299; // Ціна за замовчуванням (акційна)
         })(qty)
     };
@@ -802,7 +802,14 @@ function sendToTelegram(event) {
         localStorage.setItem('userPhone', phone);
         localStorage.setItem('userName', name);
 
-
+        // 2. Перенаправляємо на сторінку подяки
+        window.location.href = 'thanks.html';
+    }).catch(err => {
+        console.error("Помилка:", err);
+        // Навіть якщо Telegram «впав», все одно зберігаємо дані і пускаємо клієнта далі
+        localStorage.setItem('userPhone', phone);
+        localStorage.setItem('userName', name);
+        window.location.href = 'thanks.html';
     });
 } // Кінець функції sendToTelegram
     </script>
