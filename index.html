@@ -802,14 +802,7 @@ function sendToTelegram(event) {
         localStorage.setItem('userPhone', phone);
         localStorage.setItem('userName', name);
 
-        // 2. Перенаправляємо на сторінку подяки
-        window.location.href = 'thanks.html';
-    }).catch(err => {
-        console.error("Помилка:", err);
-        // Навіть якщо Telegram «впав», все одно зберігаємо дані і пускаємо клієнта далі
-        localStorage.setItem('userPhone', phone);
-        localStorage.setItem('userName', name);
-        window.location.href = 'thanks.html';
+
     });
 } // Кінець функції sendToTelegram
     </script>
