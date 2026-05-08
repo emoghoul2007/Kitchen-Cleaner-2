@@ -687,23 +687,40 @@ function toggleFaq(el) {
 
     <script>
         // --- ТАЙМЕР ЗВОРОТНЬОГО ВІДЛІКУ ---
+<script>
 function updateTimer() {
-  const now = new Date();
-  const kyivNow = new Date(now.getTime() + (3 * 60 + now.getTimezoneOffset()) * 60000);
-  const endOfDay = new Date(kyivNow);
-  endOfDay.setHours(23, 59, 59, 999);
-  const diff = endOfDay - kyivNow;
+    const now = new Date();
+    
+    // Створюємо дату кінця поточного дня (23:59:59)
+    const endOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 23, 59, 59);
+    
+    let diff = endOfDay - now;
 
-  const h = Math.floor(diff / 3600000);
-  const m = Math.floor((diff % 3600000) / 60000);
-  const s = Math.floor((diff % 60000) / 1000);
+    // Якщо раптом час вийшов за межі дня, скидаємо на нуль
+    if (diff < 0) diff = 0;
 
-  document.getElementById('hours').textContent   = String(h).padStart(2,'0');
-  document.getElementById('minutes').textContent = String(m).padStart(2,'0');
-  document.getElementById('seconds').textContent = String(s).padStart(2,'0');
+    const h = Math.floor(diff / (1000 * 60 * 60));
+    const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+    // Перевіряємо, чи існують елементи на сторінці, щоб не було помилок
+    const hEl = document.getElementById('hours');
+    const mEl = document.getElementById('minutes');
+    const sEl = document.getElementById('seconds');
+
+    if (hEl && mEl && sEl) {
+        hEl.textContent = String(h).padStart(2, '0');
+        mEl.textContent = String(m).padStart(2, '0');
+        sEl.textContent = String(s).padStart(2, '0');
+    }
 }
-updateTimer();
-setInterval(updateTimer, 1000);
+
+// Запускаємо таймер тільки після повного завантаження сторінки
+document.addEventListener('DOMContentLoaded', function() {
+    updateTimer(); // Перший запуск
+    setInterval(updateTimer, 1000); // Оновлення щосекунди
+});
+</script>
         // --- ФЕЙКОВІ ПОВІДОМЛЕННЯ ПРО ПОКУПКИ ---
         const notifications = [
             { name: "Олена, м. Київ", time: "1 хвилину тому", action: "щойно замовила Kitchen Cleaner (1+1=3)" },
