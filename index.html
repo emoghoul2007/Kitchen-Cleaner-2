@@ -374,7 +374,7 @@
 
         <div class="price-block">
             <div class="old-price">Звичайна ціна: 599 грн</div>
-            <div class="new-price">Ціна по акції: 299 грн</div>
+            <div class="new-price">Ціна по акції: 349 грн</div>
             
             <div class="promo-1plus1">🎁 залишилося 9 штук по акцій 🎁</div>
             
@@ -405,8 +405,8 @@
                 <div class="combo-text">
                     <span>1+1=3</span>
                     <span>=</span>
-                    <span class="combo-price">598 ₴</span>
-                    <span class="discount-badge-red">єкономія 299 грн</span>
+                    <span class="combo-price">698 ₴</span>
+                    <span class="discount-badge-red">єкономія 349 грн</span>
                 </div>
                 <div class="ribbon">ХІТ</div>
             </div>
@@ -414,8 +414,8 @@
                 <div class="combo-text">
                     <span>2+2=6</span>
                     <span>=</span>
-                    <span class="combo-price">1 196 ₴</span>
-                    <span class="discount-badge-red">єкономія 598 грн</span>
+                    <span class="combo-price">1 396 ₴</span>
+                    <span class="discount-badge-red">єкономія 698 грн</span>
                 </div>
                 <div class="ribbon">МЕГА</div>
             </div>
@@ -639,9 +639,9 @@ function toggleFaq(el) {
                     <div class="form-group">
                         <label for="quantity">Оберіть варіант замовлення:</label>
                         <select id="quantity" name="quantity" required>
-                            <option value="1 шт - 299 грн" selected>1 штука - 299 грн</option>
-                            <option value="Акція 1+1=3 - 598 грн">🔥 ХІТ: 1+1=3 (Отримати 3 шт) - 598 грн</option>
-                            <option value="Акція 2+2=6 - 1196 грн">🔥 МЕГА: 2+2=6 (Отримати 6 шт) - 1 196 грн</option>
+                            <option value="1 шт - 349 грн" selected>1 штука - 349 грн</option>
+                            <option value="Акція 1+1=3 - 698 грн">🔥 ХІТ: 1+1=3 (Отримати 3 шт) - 698 грн</option>
+                            <option value="Акція 2+2=6 - 1 396 грн">🔥 МЕГА: 2+2=6 (Отримати 6 шт) - 1 396 грн</option>
                             <option value="Інша кількість">Інша кількість (вказати менеджеру)</option>
                         </select>
                     </div>
@@ -782,13 +782,13 @@ const sheetData = {
         "variant": qty,
         "total": (function(q) {
             // Якщо вибрано акцію 1+1=3 (тобто клієнт платить за 2 і отримує 598 грн)
-            if (q.includes('1+1=3')) return 598; 
+            if (q.includes('1+1=3')) return 698; 
             
             // Якщо вибрано акцію 2+2=6 (тобто клієнт платить за 3 і отримує 897 грн)
-            if (q.includes('2+2=6')) return 897;
+            if (q.includes('2+2=6')) return 1 047;
             
             // Якщо це просто 1 штука
-            return 299; 
+            return 349; 
         })(qty)
     };
 
