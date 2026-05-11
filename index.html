@@ -799,20 +799,29 @@ const sheetData = {
         })(qty)
     };
 // Дані для LP-CRM
-const lpCrmUrl = 'https://badpill.lp-crm.biz/api/v1/orders?key=ae1c8921587c37499ac7b09a89aac5e7';
-const lpData = {
-    "name": name,
-    "phone": phone,
-    "product_name": "Kitchen Cleaner",
-    "product_price": sheetData.total,
-    "product_count": 1,
-    "comment": qty
-};
+const lpCrmUrl = 'https://badpill.lp-crm.biz/api/addNewOrder.html';
+const order_id = Math.round(microtime() * 10).toString() + Math.floor(Math.random() * 89999 + 10000);
+
+function microtime() { return new Date().getTime() / 1000; }
+
+const lpData = new URLSearchParams({
+    'key': 'ae1c8921587c37499ac7b09a89aac5e7',
+    'order_id': order_id,
+    'country': 'UA',
+    'bayer_name': name,
+    'phone': phone,
+    'comment': qty,
+    'products': JSON.stringify([{
+        'product_id': '1',
+        'price': sheetData.total,
+        'count': '1'
+    }])
+});
+
 fetch(lpCrmUrl, {
     method: 'POST',
     mode: 'no-cors',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(lpData)
+    body: lpData
 }).catch(e => console.log('LP-CRM error:', e));
     // Підготовка запитів
     const sendTG = fetch(tgUrl);
