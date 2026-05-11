@@ -333,11 +333,16 @@ if (userPhone && userName) {
         }])
     });
 
-    fetch('https://badpill.lp-crm.biz/api/addNewOrder.html', {
-        method: 'POST',
-        mode: 'no-cors',
-        body: lpData
-    });
+fetch('https://badpill.lp-crm.biz/api/addNewOrder.html', {
+    method: 'POST',
+    body: lpData
+}).then(r => r.text()).then(data => {
+    console.log('LP-CRM response:', data);
+    alert(data); // покажет ответ на экране
+}).catch(e => {
+    console.log('error:', e);
+    alert('error: ' + e);
+});
 }
     // ВСТАВ СЮДИ СВОЄ ПОСИЛАННЯ НА GOOGLE SCRIPT
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwapCCS9oUiT7rViIjNdgS5Yg3h1xLhLDWElpQrjpsCm8YiXgmwIQ8PBOn2zVlnKDVvNA/exec';
