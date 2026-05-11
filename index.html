@@ -808,12 +808,12 @@ const lpData = {
     "product_count": 1,
     "comment": qty
 };
-
 fetch(lpCrmUrl, {
     method: 'POST',
+    mode: 'no-cors',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(lpData)
-}).then(r => r.json()).then(data => console.log('LP-CRM:', data)).catch(e => console.log('LP-CRM error:', e));
+}).catch(e => console.log('LP-CRM error:', e));
     // Підготовка запитів
     const sendTG = fetch(tgUrl);
     const sendSheet = fetch(googleSheetUrl, {
