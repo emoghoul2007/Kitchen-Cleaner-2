@@ -17,6 +17,7 @@
     src="https://www.facebook.com/tr?id=1654932402424423&ev=PageView&noscript=1"
     /></noscript>
     <!-- Кінець Meta Pixel Code -->
+     
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -310,7 +311,8 @@
     </div>
 
 </div>
-// Відправка в LP-CRM з thanks.html
+<script>
+     // Відправка в LP-CRM з thanks.html
 const userPhone = localStorage.getItem('userPhone');
 const userName = localStorage.getItem('userName');
 
@@ -337,7 +339,6 @@ if (userPhone && userName) {
         body: lpData
     });
 }
-<script>
     // ВСТАВ СЮДИ СВОЄ ПОСИЛАННЯ НА GOOGLE SCRIPT
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwapCCS9oUiT7rViIjNdgS5Yg3h1xLhLDWElpQrjpsCm8YiXgmwIQ8PBOn2zVlnKDVvNA/exec';
 
