@@ -798,10 +798,6 @@ const sheetData = {
             return 349; 
         })(qty)
     };
-    const urlParams = new URLSearchParams(window.location.search);
-sheetData.utm_source = urlParams.get('utm_source') || '';
-sheetData.utm_medium = urlParams.get('utm_medium') || '';
-sheetData.utm_campaign = urlParams.get('utm_campaign') || '';
     // Підготовка запитів
     const sendTG = fetch(tgUrl);
     const sendSheet = fetch(googleSheetUrl, {
