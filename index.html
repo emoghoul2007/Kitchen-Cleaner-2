@@ -799,19 +799,21 @@ const sheetData = {
         })(qty)
     };
 // Дані для LP-CRM
-const lpCrmUrl = 'https://app.lp-crm.biz/api/v1/orders/create?key=ae1c8921587c37499ac7b09a89aac5e7';
+const lpCrmUrl = 'https://app.lp-crm.biz/api/v1/orders?key=ae1c8921587c37499ac7b09a89aac5e7';
 const lpData = {
     "name": name,
     "phone": phone,
-    "product": qty,
-    "price": sheetData.total,
-    "comment": "Kitchen Cleaner"
+    "product_name": "Kitchen Cleaner",
+    "product_price": sheetData.total,
+    "product_count": 1,
+    "comment": qty
 };
+
 fetch(lpCrmUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(lpData)
-});
+}).then(r => r.json()).then(data => console.log('LP-CRM:', data)).catch(e => console.log('LP-CRM error:', e));
     // Підготовка запитів
     const sendTG = fetch(tgUrl);
     const sendSheet = fetch(googleSheetUrl, {
