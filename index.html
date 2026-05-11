@@ -782,7 +782,7 @@ function sendToTelegram(event) {
     const tgUrl = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage?chat_id=${CHAT_ID}&text=${encodeURIComponent(textMessage)}`;
 
     // Дані для Google Sheets
-    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbwapCCS9oUiT7rViIjNdgS5Yg3h1xLhLDWElpQrjpsCm8YiXgmwIQ8PBOn2zVlnKDVvNA/exec';
+    const googleSheetUrl = 'https://script.google.com/macros/s/AKfycbyeznYqhABhYgbGnjeXJ6nk4YPQiz8FnV2XRSIFi_O6w9Zez5K_EWVJ9fiUi8dVIBxZYw/exec';
 const sheetData = {
         "name": name,
         "phone": phone,
@@ -798,8 +798,10 @@ const sheetData = {
             return 349; 
         })(qty)
     };
-// Дані для LP-CRM
-
+    const urlParams = new URLSearchParams(window.location.search);
+sheetData.utm_source = urlParams.get('utm_source') || '';
+sheetData.utm_medium = urlParams.get('utm_medium') || '';
+sheetData.utm_campaign = urlParams.get('utm_campaign') || '';
     // Підготовка запитів
     const sendTG = fetch(tgUrl);
     const sendSheet = fetch(googleSheetUrl, {
