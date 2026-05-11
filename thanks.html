@@ -310,7 +310,33 @@
     </div>
 
 </div>
+// Відправка в LP-CRM з thanks.html
+const userPhone = localStorage.getItem('userPhone');
+const userName = localStorage.getItem('userName');
 
+if (userPhone && userName) {
+    const order_id = Math.round(new Date().getTime() / 100).toString() + Math.floor(Math.random() * 89999 + 10000);
+    
+    const lpData = new URLSearchParams({
+        'key': 'ae1c8921587c37499ac7b09a89aac5e7',
+        'order_id': order_id,
+        'country': 'UA',
+        'bayer_name': userName,
+        'phone': userPhone,
+        'comment': 'Kitchen Cleaner — замовлення з сайту',
+        'products': JSON.stringify([{
+            'product_id': '1',
+            'price': '349',
+            'count': '1'
+        }])
+    });
+
+    fetch('https://badpill.lp-crm.biz/api/addNewOrder.html', {
+        method: 'POST',
+        mode: 'no-cors',
+        body: lpData
+    });
+}
 <script>
     // ВСТАВ СЮДИ СВОЄ ПОСИЛАННЯ НА GOOGLE SCRIPT
     const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwapCCS9oUiT7rViIjNdgS5Yg3h1xLhLDWElpQrjpsCm8YiXgmwIQ8PBOn2zVlnKDVvNA/exec';
