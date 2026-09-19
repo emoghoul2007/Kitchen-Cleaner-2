@@ -4,7 +4,8 @@
  *
  * Змінні оточення (Vercel → Settings → Environment Variables):
  *   GOOGLE_SCRIPT_URL = https://script.google.com/macros/s/AKfyc.../exec
- *   ALLOWED_ORIGIN    = https://ваш-домен.com   (можна декілька через кому)
+ *   ALLOWED_ORIGIN    = не обовʼязкова, поки лендинг лежить у цьому ж проєкті
+ *                       (запит іде з того самого домену, CORS не застосовується)
  *
  * Перевірка: відкрийте https://ваш-проєкт.vercel.app/api/lead у браузері —
  * має відповісти {"ok":true,"scriptUrlConfigured":true}.

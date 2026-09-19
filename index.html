@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="uk">
 <head>
@@ -579,8 +578,9 @@
        1. НАЛАШТУВАННЯ — ЄДИНЕ МІСЦЕ ДЛЯ ЗМІН
        ===================================================== */
     const CONFIG = {
-        // проксі на Vercel; він ховає адресу .../exec Google-таблиці
-        endpoint: 'https://YOUR-PROJECT.vercel.app/api/lead',
+        // лендинг і прокси в одному проєкті Vercel, тому шлях відносний.
+        // Адреса .../exec Google-таблиці лежить у змінній GOOGLE_SCRIPT_URL на Vercel.
+        endpoint: '/api/lead',
         pixelId: '',              // ID пікселя Meta
         stockLeft: 9,             // цифра в блоках "залишилось N штук"
         timerSeconds: 2 * 3600 + 21 * 60 + 30,
@@ -843,8 +843,14 @@
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(payload)
+        }).then(function (r) {
+            return r.json().catch(function () { return {}; });
+        }).then(function (r) {
+            if (r && r.success) console.log('LEAD OK', r);
+            else console.error('LEAD НЕ ЗБЕРЕЖЕНО, відповідь прокси:', r);
         }).catch(function (err) {
-            console.error(err);      // заявку все одно показуємо прийнятою — краще передзвонити, ніж загубити лід
+            // показуємо "дякуємо" навіть при збої мережі: краще передзвонити, ніж загубити лід
+            console.error('LEAD FETCH FAILED:', err.message, '| endpoint:', CONFIG.endpoint);
         }).then(function () {
             px('Lead', { value: s.total, currency: 'UAH', content_name: s.variant });
             px('Purchase', { value: s.total, currency: 'UAH' });   // приберіть, якщо рахуєте Purchase лише після викупу
