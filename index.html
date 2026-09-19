@@ -141,6 +141,7 @@
         }
         .calc-big span { font-size: 22px; font-weight: 900; color: #FFB74D; }
         .calc-sub { text-align: center; font-size: 14px; color: #bdbdbd; margin-bottom: 18px; }
+        .calc-sub #calcFor { color: #FF9800; font-weight: bold; }
         .calc-field { margin-bottom: 12px; }
         .calc-field label { display: block; font-size: 13px; color: #bdbdbd; margin-bottom: 6px; font-weight: bold; }
         .calc-field select {
@@ -389,7 +390,7 @@
                 <div class="calc-head">Порахуйте самі 👇</div>
                 <div class="calc-body">
                     <div class="calc-big"><b id="calcPrice">3</b><span> грн</span></div>
-                    <div class="calc-sub">за одне прибирання кухні</div>
+                    <div class="calc-sub">за одне прибирання кухні <span id="calcFor">за акцією 1+1=3</span></div>
 
                     <div class="calc-field">
                         <label for="calcPack">Який варіант замовляєте:</label>
@@ -411,7 +412,7 @@
                     </div>
 
                     <div class="calc-out">
-                        <div><span>Вистачить обробок:</span><b id="calcUses">≈198</b></div>
+                        <div><span>Вистачить обробок:</span><b id="calcUses">≈195</b></div>
                         <div><span>Це приблизно:</span><b id="calcMonths">≈1,9 року</b></div>
                         <div><span>Одне прибирання:</span><b id="calcPerUse">≈3 грн</b></div>
                     </div>
@@ -421,7 +422,7 @@
                         <div>Одна кава на виніс = <b>20 прибирань</b> вашої кухні цим засобом</div>
                     </div>
 
-                    <p class="calc-note">Розрахунок: балон 650 мл, приблизно 10 мл на одну обробку плити чи дверцят духовки. Реальна витрата залежить від ступеня забруднення.</p>
+                    <p class="calc-note">Розрахунок: балон 260 мл, приблизно 4 мл на одну обробку — це 2-3 натискання на пляму жиру або нагару. Реальна витрата залежить від ступеня забруднення.</p>
                 </div>
             </div>
 
@@ -478,12 +479,12 @@
                         <tr>
                             <td>Об'єм балона</td>
                             <td><span class="icon-bad">✘</span> 100-150 мл</td>
-                            <td class="highlight-cell"><span class="green-frame"><span class="icon-good" style="color:#1b5e20;">✔</span> 650 мл</span></td>
+                            <td class="highlight-cell"><span class="green-frame"><span class="icon-good" style="color:#1b5e20;">✔</span> 260 мл</span></td>
                         </tr>
                         <tr>
                             <td>Ціна прибирання</td>
                             <td><span class="icon-bad">✘</span> 15-25 грн</td>
-                            <td class="highlight-cell"><span class="icon-good">✔</span> ≈3 грн</td>
+                            <td class="highlight-cell"><span class="icon-good">✔</span> від 3 грн</td>
                         </tr>
                         <tr>
                             <td>Швидкість реакції</td>
@@ -511,10 +512,10 @@
                     <div class="form-group">
                         <label for="quantity">Оберіть варіант замовлення:</label>
                         <select id="quantity" name="quantity" required>
-                            <option value="1 шт - 299 грн" data-qty="1" data-total="299">1 штука - 299 грн</option>
-                            <option value="Акція 1+1=3 - 598 грн" data-qty="3" data-total="598" selected>🔥 ХІТ: 1+1=3 (Отримати 3 шт) - 598 грн</option>
-                            <option value="Акція 2+2=6 - 1196 грн" data-qty="6" data-total="1196">🔥 МЕГА: 2+2=6 (Отримати 6 шт) - 1196 грн</option>
-                            <option value="Інша кількість" data-qty="1" data-total="299">Інша кількість (вказати менеджеру)</option>
+                            <option value="1 шт - 299 грн" data-qty="1" data-total="299" data-short="1 балон" selected>1 штука - 299 грн</option>
+                            <option value="Акція 1+1=3 - 598 грн" data-qty="3" data-total="598" data-short="1+1=3 (3 шт)">🔥 ХІТ: 1+1=3 (Отримати 3 шт) - 598 грн</option>
+                            <option value="Акція 2+2=6 - 1196 грн" data-qty="6" data-total="1196" data-short="2+2=6 (6 шт)">🔥 МЕГА: 2+2=6 (Отримати 6 шт) - 1196 грн</option>
+                            <option value="Інша кількість" data-qty="1" data-total="299" data-short="уточнити">Інша кількість (вказати менеджеру)</option>
                         </select>
                     </div>
                     <div class="form-group" id="g-name">
@@ -532,7 +533,7 @@
 
                     <div class="total-row">
                         <span>До сплати при отриманні:</span>
-                        <b id="formTotal">598 грн</b>
+                        <b id="formTotal">299 грн</b>
                     </div>
 
                     <button type="submit" class="submit-btn" id="submitBtn">ОФОРМИТИ ЗАМОВЛЕННЯ</button>
@@ -569,7 +570,7 @@
     </div>
 
     <div class="sticky-bar" id="stickyBar">
-        <div class="sticky-price"><b id="stickyTotal">598 грн</b><s>1197 грн</s></div>
+        <div class="sticky-price"><b id="stickyTotal">299 грн</b><s id="stickyLabel" style="text-decoration:none">1 балон</s></div>
         <a href="#order" data-cta="sticky">Замовити</a>
     </div>
 
@@ -583,7 +584,8 @@
         pixelId: '',              // ID пікселя Meta
         stockLeft: 9,             // цифра в блоках "залишилось N штук"
         timerSeconds: 2 * 3600 + 21 * 60 + 30,
-        usesPerCan: 66            // скільки обробок з одного балона (650 мл / ~10 мл)
+        canVolumeMl: 260,         // обʼєм балона
+        mlPerUse: 4               // скільки мл іде на одну обробку (2-3 натискання)
     };
 
     /* =====================================================
@@ -677,13 +679,15 @@
         return {
             variant: opt.value,
             qty: parseInt(opt.dataset.qty, 10) || 1,
-            total: parseInt(opt.dataset.total, 10) || 0
+            total: parseInt(opt.dataset.total, 10) || 0,
+            short: opt.dataset.short || ''
         };
     }
     function refreshTotals() {
         var s = selected();
         formTotal.textContent = s.total + ' грн';
         stickyTotal.textContent = s.total + ' грн';
+        document.getElementById('stickyLabel').textContent = s.short;
     }
     qtySelect.addEventListener('change', function () {
         refreshTotals();
@@ -713,16 +717,19 @@
        7. КАЛЬКУЛЯТОР ВАРТОСТІ ПРИБИРАННЯ
        ===================================================== */
     var PACK_PRICE = { 1: 299, 3: 598, 6: 1196 };
+    var USES_PER_CAN = Math.round(CONFIG.canVolumeMl / CONFIG.mlPerUse);   // 260 / 4 = 65 обробок
     var calcFreq = document.getElementById('calcFreq');
 
     function recalc() {
         var cans = parseInt(calcPack.value, 10);
         var price = PACK_PRICE[cans];
         var freq = parseInt(calcFreq.value, 10);
-        var uses = cans * CONFIG.usesPerCan;
+        var uses = cans * USES_PER_CAN;
         var perUse = price / uses;
         var months = uses / (freq * 4.33);
 
+        document.getElementById('calcFor').textContent =
+            cans === 1 ? 'за 1 балон' : (cans === 3 ? 'за акцією 1+1=3' : 'за акцією 2+2=6');
         document.getElementById('calcPrice').textContent = perUse < 10 ? perUse.toFixed(1).replace('.0', '') : Math.round(perUse);
         document.getElementById('calcUses').textContent = '≈' + uses;
         document.getElementById('calcPerUse').textContent = '≈' + (perUse < 10 ? perUse.toFixed(1).replace('.0', '') : Math.round(perUse)) + ' грн';
