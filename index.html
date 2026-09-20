@@ -25,6 +25,8 @@ function gtag_report_conversion(url) {
   };
   gtag('event', 'conversion', {
       'send_to': 'AW-18463686764/To6ICK3O3v4cEOyAluRE',
+      'value': 299.0,
+      'currency': 'UAH',
       'event_callback': callback
   });
   return false;
@@ -871,10 +873,14 @@ function gtag_report_conversion(url) {
             body: JSON.stringify(payload)
         }).then(function (r) {
             return r.json().catch(function () { return {}; });
-        }).then(function (r) {
-            if (r && r.success) console.log('LEAD OK', r);
-            else console.error('LEAD НЕ ЗБЕРЕЖЕНО, відповідь прокси:', r);
-        }).catch(function (err) {
+}).then(function (r) {
+    if (r && r.success) {
+        console.log('LEAD OK', r);
+        if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
+    } else {
+        console.error('LEAD НЕ ЗБЕРЕЖЕНО, відповідь прокси:', r);
+    }
+}).catch(function (err) {
             // показуємо "дякуємо" навіть при збої мережі: краще передзвонити, ніж загубити лід
             console.error('LEAD FETCH FAILED:', err.message, '| endpoint:', CONFIG.endpoint);
         }).then(function () {
