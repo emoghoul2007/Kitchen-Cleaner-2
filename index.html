@@ -890,6 +890,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     if (r && r.success) {
         console.log('LEAD OK', r);
         if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
+                if (window.ttq) ttq.track('SubmitForm', { value: 299, currency: 'UAH' });
     } else {
         console.error('LEAD НЕ ЗБЕРЕЖЕНО, відповідь прокси:', r);
     }
