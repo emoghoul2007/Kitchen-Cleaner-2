@@ -637,7 +637,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
     t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}
     (window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    if (CONFIG.pixelId) { fbq('init', CONFIG.pixelId); fbq('track', 'PageView'); }
+    if (CONFIG.pixelId) { fbq('set', 'autoConfig', false, CONFIG.pixelId); fbq('init', CONFIG.pixelId); fbq('track', 'PageView'); }
     function px(ev, params) { try { if (window.fbq && CONFIG.pixelId) fbq('track', ev, params || {}); } catch (e) {} }
 
     /* =====================================================
@@ -886,20 +886,20 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             body: JSON.stringify(payload)
         }).then(function (r) {
             return r.json().catch(function () { return {}; });
-}).then(function (r) {
-    if (r && r.success) {
-        console.log('LEAD OK', r);
-        if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
-                if (window.ttq) ttq.track('SubmitForm', { value: 299, currency: 'UAH' });
-    } else {
-        console.error('LEAD НЕ ЗБЕРЕЖЕНО, відповідь прокси:', r);
-    }
-}).catch(function (err) {
+        }).then(function (r) {
+            if (r && r.success) {
+                console.log('LEAD OK', r);
+                px('Lead', { value: s.total, currency: 'UAH', content_name: s.variant });
+                px('Purchase', { value: s.total, currency: 'UAH' });
+                if (typeof gtag_report_conversion === 'function') gtag_report_conversion();
+                if (window.ttq) ttq.track('SubmitForm', { value: s.total, currency: 'UAH' });
+            } else {
+                console.error('LEAD НЕ ЗБЕРЕЖЕНО, відповідь прокси:', r);
+            }
+        }).catch(function (err) {
             // показуємо "дякуємо" навіть при збої мережі: краще передзвонити, ніж загубити лід
             console.error('LEAD FETCH FAILED:', err.message, '| endpoint:', CONFIG.endpoint);
         }).then(function () {
-            px('Lead', { value: s.total, currency: 'UAH', content_name: s.variant });
-            px('Purchase', { value: s.total, currency: 'UAH' });   // приберіть, якщо рахуєте Purchase лише після викупу
             form.style.display = 'none';
             document.getElementById('successMessage').style.display = 'block';
             document.getElementById('stickyBar').classList.remove('show');
@@ -907,7 +907,6 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
             document.getElementById('order').scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
     });
-
     /* =====================================================
        11. ЛИПКА ПАНЕЛЬ
        ===================================================== */
